@@ -46,7 +46,7 @@ const BuyerDetailsModal = ({ open, handleClose, buyerDetails }) => {
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.income}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.expenses}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.profit}</TableCell>
-                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.Roi}</TableCell>
+                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.Roi}%</TableCell>
                 </TableRow>
               ))}
             </TableBody>
