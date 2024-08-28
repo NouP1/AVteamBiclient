@@ -34,7 +34,8 @@ const BuyerDetailsModal = ({ open, handleClose, buyerDetails }) => {
               <TableRow>
                 <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)', }}>Date</TableCell>
                 <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>Revenue</TableCell>
-                <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>Spent</TableCell>
+                <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>Spent Agn</TableCell>
+                <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>Spent Acc </TableCell>
                 <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>Profit</TableCell>
                 <TableCell sx={{borderRight:'1px solid rgba(224, 224, 224, 1)'}}>ROI</TableCell>
               </TableRow>
@@ -44,7 +45,8 @@ const BuyerDetailsModal = ({ open, handleClose, buyerDetails }) => {
                 <TableRow key={index}>
                   <TableCell>{record.date}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.income}</TableCell>
-                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.expenses}</TableCell>
+                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.expensesAgn}</TableCell>
+                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + record.expensesAcc}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.profit}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.Roi}%</TableCell>
                 </TableRow>

@@ -9,7 +9,7 @@ const BuyerDashboard = ({ username }) => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response = await axios.get(`/api/buyer/${username}/records`);
+        const response = await axios.get(`http://localhost:3100/api/buyer/${username}/records`);
         setRecords(response.data);
       
       } catch (err) {
@@ -38,7 +38,8 @@ const BuyerDashboard = ({ username }) => {
             <TableRow>
               <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Date</TableCell>
               <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Revenue</TableCell>
-              <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent</TableCell>
+              <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent Agn</TableCell>
+              <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent Acc</TableCell>
               <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Profit</TableCell>
               <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>ROI</TableCell>
             </TableRow>
@@ -48,7 +49,8 @@ const BuyerDashboard = ({ username }) => {
               <TableRow key={index}>
                 <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{record.date}</TableCell>
                 <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`$${record.income}`}</TableCell>
-                <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`$${record.expenses}`}</TableCell>
+                <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`$${record.expensesAgn}`}</TableCell>
+                <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`$${record.expensesAcc}`}</TableCell>
                 <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`${record.profit}`}</TableCell>
                 <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{`${record.Roi}%`}</TableCell>
               </TableRow>

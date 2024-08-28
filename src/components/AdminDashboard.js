@@ -11,7 +11,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchBuyers = async () => {
       try {
-        const response = await axios.get('/api/admin/buyers');
+        const response = await axios.get('http://localhost:3100/api/admin/buyers');
         setBuyers(response.data);
       } catch (err) {
         console.error(err);
@@ -23,7 +23,7 @@ const AdminDashboard = () => {
 
   const handleRowClick = async (buyer) => {
     try {
-      const response = await axios.get(`/api/buyer/${buyer.nameBuyer}/records`);
+      const response = await axios.get(`http://localhost:3100/api/buyer/${buyer.nameBuyer}/records`);
       const buyerDetails = {
         nameBuyer: buyer.nameBuyer,
         records: response.data,
@@ -54,7 +54,8 @@ const AdminDashboard = () => {
               {/* <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}} >ID</TableCell> */}
               <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Name</TableCell>
               <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Revenue</TableCell>
-              <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent</TableCell>
+              <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent Agn</TableCell>
+              <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Spent Acc</TableCell>
               <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>Profit</TableCell>
               <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>ROI</TableCell>
               <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>FD</TableCell>
@@ -82,7 +83,8 @@ const AdminDashboard = () => {
                 {/* <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{buyer.id}</TableCell> */}
                 <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{buyer.nameBuyer}</TableCell>
                 <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + buyer.countRevenue}</TableCell>
-                <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + buyer.expenses}</TableCell> 
+                <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + buyer.expensesAgn}</TableCell>
+                <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{'$' + buyer.expensesAcc}</TableCell>  
                 <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{buyer.profit}</TableCell>
                 <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{buyer.Roi+'%'}</TableCell>
                 <TableCell align="left" sx={{border:'1px solid rgba(224, 224, 224, 1)'}}>{buyer.countFirstdeps}</TableCell>
