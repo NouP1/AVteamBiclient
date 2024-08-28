@@ -9,7 +9,7 @@ const BuyerDashboard = ({ username }) => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response = await axios.get(`http://localhost:3100/api/buyer/${username}/records`);
+        const response = await axios.get(`/api/buyer/${username}/records`);
         setRecords(response.data);
       
       } catch (err) {
