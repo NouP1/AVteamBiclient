@@ -102,14 +102,14 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
                    
                   </Box> 
                   <Typography variant="h7" gutterBottom sx={{fontSize: 15}}>
-                    {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')} || {message}
+                    {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome || "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn || "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc || "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit)|| "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi}%`|| "—"}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome || 0}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn || 0}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc || 0}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit|| 0) }`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi|| 0}%`}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ border: '1px solid rgba(224, 224, 224, 1)' }}>Date</TableCell>
