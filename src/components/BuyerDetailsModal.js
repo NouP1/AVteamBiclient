@@ -52,7 +52,7 @@ const BuyerDetailsModal = ({ open, handleClose, buyerDetails, dateRangeBuyer}) =
               {buyerDetails.records.records.map((record, index) => (
                 <TableRow key={index}>
                   <TableCell sx={{textAlign: 'center'}}>{record.date}</TableCell>
-                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)', textAlign: 'center'}}>{'$' + record.income}</TableCell>
+                  <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)', textAlign: 'center'}}>{record.income}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)', textAlign: 'center'}}>{'$' + record.expensesAgn}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)', textAlign: 'center'}}>{'$' + record.expensesAcc}</TableCell>
                   <TableCell sx={{border:'1px solid rgba(224, 224, 224, 1)', textAlign: 'center'}}>{record.profit}</TableCell>
