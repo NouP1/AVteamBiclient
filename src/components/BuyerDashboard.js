@@ -5,6 +5,7 @@ import dayjs from 'dayjs';
 import { IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DateRangeSelector from './DateRangeSelector';
+import { message } from 'ant-design-vue';
 
 const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   const [records, setRecords] = useState([]);
@@ -17,6 +18,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDateRangeSelectorOpen, setDateRangeSelectorOpen] = useState(false);
+  // const[message,setMessage] = useState(false)
 
   const { startDate, endDate } = dateRange || {};
 
@@ -29,7 +31,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
     const fetchRecords = async () => {
       try {
         console.log('Fetching records for:', { startDate, endDate });
-        const response = await axios.get(`/api/buyer/${username}/records`, {
+        const response = await axios.get(`http://localhost:3100/api/buyer/${username}/records`, {
           params: {
             startDate: dayjs(startDate).format('YYYY-MM-DD'),
             endDate: dayjs(endDate).format('YYYY-MM-DD')
@@ -44,6 +46,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
         setTotalProfit(totalProfit);
         setTotalRecordsCount(totalRecordsCount);
         setTotalRoi(totalRoi);
+        // setMessage(message)
 
       } catch (err) {
         setError('Ошибка загрузки данных');
@@ -99,14 +102,14 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
                    
                   </Box> 
                   <Typography variant="h7" gutterBottom sx={{fontSize: 15}}>
-                    {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')}
+                    {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')} || {message}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit)}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi}%`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome || "—"}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn|| "—"}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc|| "—"}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit)|| "—"}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi}%`|| "—"}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ border: '1px solid rgba(224, 224, 224, 1)' }}>Date</TableCell>

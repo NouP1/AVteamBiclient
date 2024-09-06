@@ -31,7 +31,7 @@ const BuyerDetailsModal = ({ open, handleClose, buyerDetails, dateRangeBuyer}) =
           Данные байера: {buyerDetails.nameBuyer}
         </Typography>
         <Typography variant="h6" component="h3" id="modal-title" sx={{fontSize:15,verticalAlign:'sub'}}>
-          {dateRangeBuyer.startDate} - {dateRangeBuyer.endDate}
+          {dateRangeBuyer.startDate} — {dateRangeBuyer.endDate}
         </Typography>
 
 
