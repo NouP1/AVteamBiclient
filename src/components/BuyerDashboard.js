@@ -105,11 +105,11 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
                     {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')} || {message}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome || "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn|| "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc|| "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit)|| "—"}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi}%`|| "—"}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome!== undefined ? totalRoi : '—'}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn!== undefined ? totalRoi : '—'}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc!== undefined ? totalRoi : '—'}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit)!== undefined ? totalRoi : '—'}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi}%`!== undefined ? totalRoi : '—'}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ border: '1px solid rgba(224, 224, 224, 1)' }}>Date</TableCell>
