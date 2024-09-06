@@ -31,7 +31,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
     const fetchRecords = async () => {
       try {
         console.log('Fetching records for:', { startDate, endDate });
-        const response = await axios.get(`http://localhost:3100/api/buyer/${username}/records`, {
+        const response = await axios.get(`/api/buyer/${username}/records`, {
           params: {
             startDate: dayjs(startDate).format('YYYY-MM-DD'),
             endDate: dayjs(endDate).format('YYYY-MM-DD')
