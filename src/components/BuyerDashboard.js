@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import { IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DateRangeSelector from './DateRangeSelector';
-import { message } from 'ant-design-vue';
+
 
 const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   const [records, setRecords] = useState([]);
@@ -15,6 +15,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   const [totalProfit, setTotalProfit] = useState(0);
   const [totalRecordsCount, setTotalRecordsCount] = useState(0);
   const [totalRoi, setTotalRoi] = useState(0);
+  const [reject, setReject] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isDateRangeSelectorOpen, setDateRangeSelectorOpen] = useState(false);
@@ -37,7 +38,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
             endDate: dayjs(endDate).format('YYYY-MM-DD')
           }
         });
-        const { records, totalIncome, totalExpensesAgn, totalExpensesAcc, totalProfit, totalRecordsCount, totalRoi } = response.data || {};
+        const { records, totalIncome, totalExpensesAgn, totalExpensesAcc, totalProfit, totalRecordsCount, totalRoi,reject } = response.data || {};
 
         setRecords(records);
         setTotalIncome(totalIncome);
@@ -46,6 +47,7 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
         setTotalProfit(totalProfit);
         setTotalRecordsCount(totalRecordsCount);
         setTotalRoi(totalRoi);
+        setReject(reject)
         // setMessage(message)
 
       } catch (err) {
@@ -69,17 +71,13 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   };
 
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="md" sx={{display:'flex', flexDirection: 'row',alignItems: 'center' }}>
       <Box sx={{ marginTop: 16, padding: 3, borderRadius: 3, boxShadow: 5 }}>
-
         <DateRangeSelector
           open={isDateRangeSelectorOpen}
           onClose={() => setDateRangeSelectorOpen(false)}
           onRangeSelected={handleDateRangeSelected}
         />
-
-
-
         <TableContainer component={Paper} sx={{ borderRadius: 0, boxShadow: 0, border: 'none', overflowX: 'auto' }}>
           <Table sx={{ borderRadius: 0, minWidth: 650 }}>
 
@@ -105,11 +103,11 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
                     {dayjs(startDate).format('YYYY.MM.DD')} — {dayjs(endDate).format('YYYY.MM.DD')}
                     </Typography>
                 </TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalIncome || 0}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAgn || 0}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`$${totalExpensesAcc || 0}`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${formatCurrency(totalProfit|| 0) }`}</TableCell>
-                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16 }}>{`${totalRoi|| 0}%`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16,padding:'9px',verticalAlign:'bottom' }}>{` ${formatCurrency(totalIncome || 0) }`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16,padding:'9px',verticalAlign:'bottom' }}>{`$${totalExpensesAgn || 0}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16,padding:'9px',verticalAlign:'bottom' }}>{`$${totalExpensesAcc || 0}`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16,padding:'9px',verticalAlign:'bottom' }}>{`${formatCurrency(totalProfit|| 0) }`}</TableCell>
+                <TableCell sx={{ fontWeight: 'bold', paddingLeft: 2, borderBottom: 'none', fontSize: 16,padding:'9px',verticalAlign:'bottom' }}>{`${totalRoi|| 0}%`}</TableCell>
               </TableRow>
               <TableRow>
                 <TableCell sx={{ border: '1px solid rgba(224, 224, 224, 1)' }}>Date</TableCell>
@@ -134,8 +132,28 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
               ))}
             </TableBody>
           </Table>
+          
+        </TableContainer>
+       
+      </Box>
+      <Box sx={{width:'30%' }}>
+        <TableContainer component={Paper} sx={{ borderRadius: 4, boxShadow: 3, border: 'none', overflowX: 'hidden', width: '100%', height: '108px', marginLeft:'20px',display: 'flex',
+    alignItems: 'flex-start', justifyContent: 'space-around' }}>
+          <Table sx={{ borderRadius: 10,  width: '40%', textAlign:'center' }}>
+            <TableHead sx={{textAlign:'center'}}>
+              <TableRow >
+                <TableCell sx={{ fontSize: 15,fontWeight:'700',textAlign:'center', borderBottom: 'none', verticalAlign: 'sub', width:'1%'}}>Reject</TableCell>
+              </TableRow>
+             
+              <TableRow >
+                <TableCell sx={{textAlign:'center', padding:0}}>{`$${reject}`}</TableCell>
+              </TableRow>
+            
+              </TableHead>
+              </Table>
         </TableContainer>
       </Box>
+     
     </Container>
   );
 };
