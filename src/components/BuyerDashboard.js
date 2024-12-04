@@ -5,9 +5,10 @@ import dayjs from 'dayjs';
 import { IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DateRangeSelector from './DateRangeSelector';
+ import { replace, useNavigate } from 'react-router-dom';
 
 
-const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
+const BuyerDashboard = ({ username, dateRange, onDateRangeChange, userId }) => {
   const [records, setRecords] = useState([]);
   const [totalIncome, setTotalIncome] = useState(0);
   const [totalExpensesAgn, setTotalExpensesAgn] = useState(0);
@@ -18,11 +19,13 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   const [reject, setReject] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [errorAccess, setErrorAccess] = useState(false);
   const [isDateRangeSelectorOpen, setDateRangeSelectorOpen] = useState(false);
-  
+ 
   // const[message,setMessage] = useState(false)
 
   const { startDate, endDate } = dateRange || {};
+  const navigate = useNavigate();
 
   const handleDateRangeSelected = (range) => {
     onDateRangeChange(range); // Передаем диапазон дат в родительский компонент
@@ -30,14 +33,26 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange }) => {
   };
 
   useEffect(() => {
+
+    const savedUser = JSON.parse(localStorage.getItem('user'));
+   
+
     const fetchRecords = async () => {
       setLoading(true)
       try {
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        if (savedUser?.username === "id6" ){
+          localStorage.removeItem('user');
+          window.location.reload(); // Редирект на логин
+          return;
+        }
         console.log('Fetching records for:', { startDate, endDate });
         const response = await axios.get(`/api/buyer/${username}/records`, {
           params: {
             startDate: dayjs(startDate).format('YYYY-MM-DD'),
-            endDate: dayjs(endDate).format('YYYY-MM-DD')
+            endDate: dayjs(endDate).format('YYYY-MM-DD'),
+            userId: userId
+            
           }
         });
         const { records, totalIncome, totalExpensesAgn, totalExpensesAcc, totalProfit, totalRecordsCount, totalRoi, reject } = response.data || {};
@@ -56,6 +71,10 @@ setTimeout(() => {
           setLoading(false);
         }, 900);
       } catch (err) {
+        if (err.response?.status === 403) {
+          setErrorAccess(true)
+           
+        }
         setError('Ошибка загрузки данных');
         console.error(err);
         setLoading(false);
@@ -71,6 +90,19 @@ setTimeout(() => {
     return value < 0 ? `-$${Math.abs(value)}` : `$${value}`;
   };
 
+
+  // if (errorAccess) {
+  //   window.location.reload();
+  //   return (
+  //     <Container sx={{zIndex:10000, color:'#ffff'}}>
+  //       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
+  //         <Typography variant="h4" color="error">
+  //         Account not found
+  //         </Typography>
+  //       </Box>
+  //     </Container>
+  //   );
+  // }
   return (
     <Container maxWidth="md" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', alignItems: 'flex-start' ,
   

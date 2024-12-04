@@ -48,7 +48,7 @@ const App = () => {
   ];
 
   return (
-    <Router>
+    <Router>   
       <div>
         {!user ? (
           <Routes>
@@ -57,13 +57,14 @@ const App = () => {
           </Routes>
         ) : (
           <>
+          
             <NavBar onMenuClick={handleMenuClick} onLogout={handleLogout} />
             <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} menuItems={menuItems} />
             <Routes>
               {user.role === 'admin' ? (
                 <Route path="/admin" element={<AdminDashboard dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange}/>} />
               ) : (
-                <Route path={`/buyer/${user.name}`} element={<BuyerRecords username={user.name} dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange} />} />
+                <Route path={`/buyer/${user.name}`} element={<BuyerRecords username={user.name} userId = {user.username} dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange} />} />
               )}
               <Route path="*" element={<Navigate to={user.role === 'admin' ? '/admin' : `/buyer/${user.name}`} />} />
             </Routes>
