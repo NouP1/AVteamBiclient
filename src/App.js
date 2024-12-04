@@ -63,7 +63,7 @@ const App = () => {
             <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} menuItems={menuItems} />
             <Routes>
               {user.role === 'admin' ? (
-                <Route path="/admin" element={<AdminDashboard dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange}/>} />
+                <Route path="/admin" element={<AdminDashboard userId = {user.username} dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange}/>} />
               ) : (
                 <Route path={`/buyer/${user.name}`} element={<BuyerRecords username={user.name} userId = {user.username} dateRange={selectedDateRange} onDateRangeChange={handleDateRangeChange} />} />
               )}

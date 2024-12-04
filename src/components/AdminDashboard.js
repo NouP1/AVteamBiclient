@@ -7,7 +7,7 @@ import { IconButton } from '@mui/material';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import DateRangeSelector from './DateRangeSelector';
 
-const AdminDashboard = ({ dateRange, onDateRangeChange }) => {
+const AdminDashboard = ({ dateRange, onDateRangeChange, userId }) => {
   const [buyers, setBuyers] = useState([]);
   const [selectedBuyer, setSelectedBuyer] = useState(null);
   const [dateRangee, setSelectedData] = useState(null);
@@ -59,7 +59,8 @@ const AdminDashboard = ({ dateRange, onDateRangeChange }) => {
         {
           params: {
             startDate: dayjs(startDate).format('YYYY-MM-DD'),
-            endDate: dayjs(endDate).format('YYYY-MM-DD')
+            endDate: dayjs(endDate).format('YYYY-MM-DD'),
+            userId: userId
           }
         });
 
