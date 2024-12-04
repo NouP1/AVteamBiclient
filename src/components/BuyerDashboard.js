@@ -40,18 +40,18 @@ const BuyerDashboard = ({ username, dateRange, onDateRangeChange, userId }) => {
     const fetchRecords = async () => {
       setLoading(true)
       try {
-        const savedUser = JSON.parse(localStorage.getItem('user'));
-        if (savedUser?.username === "id6" ){
-          localStorage.removeItem('user');
-          window.location.reload(); // Редирект на логин
-          return;
-        }
-        console.log('Fetching records for:', { startDate, endDate });
+        // const savedUser = JSON.parse(localStorage.getItem('user'));
+        // if (savedUser?.username === "id6" ){
+        //   localStorage.removeItem('user');
+        //   window.location.reload(); // Редирект на логин
+        //   return;
+        // }
+        console.log('Fetching records for:', { startDate, endDate, userId });
         const response = await axios.get(`/api/buyer/${username}/records`, {
           params: {
             startDate: dayjs(startDate).format('YYYY-MM-DD'),
             endDate: dayjs(endDate).format('YYYY-MM-DD'),
-            userId: userId
+            userId,
             
           }
         });
@@ -73,7 +73,8 @@ setTimeout(() => {
       } catch (err) {
         if (err.response?.status === 403) {
           setErrorAccess(true)
-          window.location.reload();
+
+          // window.location.reload();
         }
         setError('Ошибка загрузки данных');
         console.error(err);
