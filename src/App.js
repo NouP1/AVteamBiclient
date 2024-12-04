@@ -17,17 +17,6 @@ const App = () => {
     if (savedUser) {
       setUser(JSON.parse(savedUser));
     }
-    const checkForReload = async () => {
-      const response = await fetch('/api/reload');
-      const data = await response.json();
-      if (data.reload) {
-        window.location.reload();
-      }
-    };
-  
-    const interval = setInterval(checkForReload, 5000); // Проверяем каждые 5 секунд
-  
-    return () => clearInterval(interval); // Очистка при размонтировании компонента
   }, []);
  
 
