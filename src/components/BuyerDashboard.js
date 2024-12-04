@@ -73,7 +73,7 @@ setTimeout(() => {
       } catch (err) {
         if (err.response?.status === 403) {
           setErrorAccess(true)
-           
+          window.location.reload();
         }
         setError('Ошибка загрузки данных');
         console.error(err);
@@ -92,7 +92,7 @@ setTimeout(() => {
 
 
   // if (errorAccess) {
-  //   window.location.reload();
+   
   //   return (
   //     <Container sx={{zIndex:10000, color:'#ffff'}}>
   //       <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" height="100vh">
